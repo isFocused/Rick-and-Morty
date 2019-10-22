@@ -26,6 +26,8 @@ class DetailViewController: UITableViewController {
         customizeTableView(object: сharacter)
     }
     
+// MARK: - Private methods
+    
     private func customizeTableView(object: Сharacter) {
         title = object.name
         idLabel.text = "# \(object.id ?? 0)"

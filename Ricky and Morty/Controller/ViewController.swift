@@ -25,12 +25,24 @@ class ViewController: UIViewController {
         parseJson()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        if tableView.indexPathForSelectedRow != nil {
+            let indexPath = tableView.indexPathForSelectedRow!
+            tableView.deselectRow(at: indexPath, animated: true)
+        }
+    }
+    
+// MARK: - Navigation
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "Next" {
             let vc = segue.destination as! DetailViewController
             vc.сharacter = sender as? Сharacter
         }
     }
+    
+// MARK: - Private methods
     
     private func parseJson() {
         let jsonUrlString = "https://rickandmortyapi.com/api/character/1,2,3,4,5,6,7,8,9,10,56,74,101,23,75,80,211,183"
@@ -57,6 +69,8 @@ class ViewController: UIViewController {
             }.resume()
     }
 }
+
+// MARK: - UITableViewDelegate, UITableViewDataSource
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
