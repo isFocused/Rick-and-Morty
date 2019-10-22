@@ -26,7 +26,7 @@ class ViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
+        super.viewDidAppear(animated)
         if tableView.indexPathForSelectedRow != nil {
             let indexPath = tableView.indexPathForSelectedRow!
             tableView.deselectRow(at: indexPath, animated: true)
