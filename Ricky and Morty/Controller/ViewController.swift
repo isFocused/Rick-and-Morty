@@ -15,12 +15,12 @@ class ViewController: UIViewController {
     @IBOutlet var tableView: UITableView!
     @IBOutlet var activitiIndicator: UIActivityIndicatorView!
     
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         activitiIndicator.startAnimating()
         tableView.isHidden = true
-        self.navigationController?.navigationBar.isHidden = true
+        navigationController?.navigationBar.isHidden = true
         tableView.tableFooterView = UIView()
         parseJson()
     }
@@ -33,7 +33,7 @@ class ViewController: UIViewController {
         }
     }
     
-// MARK: - Navigation
+    // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "Next" {
@@ -42,7 +42,7 @@ class ViewController: UIViewController {
         }
     }
     
-// MARK: - Private methods
+    // MARK: - Private methods
     
     private func parseJson() {
         let jsonUrlString = "https://rickandmortyapi.com/api/character/1,2,3,4,5,6,7,8,9,10,56,74,101,23,75,80,211,183"
@@ -50,23 +50,23 @@ class ViewController: UIViewController {
         
         guard let url = URL(string: jsonUrlString) else { return }
         
-        URLSession.shared.dataTask(with: url) { (data, respons, error) in
-                guard let data = data else { return }
-                
-                do {
-                    self.сharacters = try JSONDecoder().decode([Сharacter].self, from: data)
-                    DispatchQueue.main.async {
-                        self.activitiIndicator.stopAnimating()
-                        self.tableView.isHidden = false
-                        self.tableView.reloadData()
-                        self.navigationController?.navigationBar.isHidden = false
-                        self.tableView.topAnchor.constraint(equalTo: (
+        URLSession.shared.dataTask(with: url) { (data, _, _) in
+            guard let data = data else { return }
+            
+            do {
+                self.сharacters = try JSONDecoder().decode([Сharacter].self, from: data)
+                DispatchQueue.main.async {
+                    self.activitiIndicator.stopAnimating()
+                    self.tableView.isHidden = false
+                    self.tableView.reloadData()
+                    self.navigationController?.navigationBar.isHidden = false
+                    self.tableView.topAnchor.constraint(equalTo: (
                         self.navigationController!.navigationBar.bottomAnchor)).isActive = true
-                    }
-                } catch {
-                    print(error.localizedDescription)
                 }
-            }.resume()
+            } catch {
+                print(error.localizedDescription)
+            }
+        }.resume()
     }
 }
 
@@ -96,7 +96,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-         let сharacter = сharacters[indexPath.row]
-         performSegue(withIdentifier: "Next", sender: сharacter)
-     }
+        let сharacter = сharacters[indexPath.row]
+        performSegue(withIdentifier: "Next", sender: сharacter)
+    }
 }

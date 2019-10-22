@@ -21,7 +21,7 @@ enum Gender: String, Decodable {
     case unknown
     
     init(from decoder: Decoder) throws {
-      let label = try decoder.singleValueContainer().decode(String.self)
+        let label = try decoder.singleValueContainer().decode(String.self)
         self = Gender(rawValue: label) ?? .unknown
     }
 }
@@ -31,7 +31,7 @@ enum Species: String, Decodable {
     case human = "Human"
 
     init(from decoder: Decoder) throws {
-      let label = try decoder.singleValueContainer().decode(String.self)
+        let label = try decoder.singleValueContainer().decode(String.self)
         self = Species(rawValue: label) ?? .alien
     }
 }

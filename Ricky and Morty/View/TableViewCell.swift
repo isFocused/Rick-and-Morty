@@ -9,7 +9,7 @@
 import UIKit
 
 class TableViewCell: UITableViewCell {
-
+    
     @IBOutlet var myImage: UIImageView!
     @IBOutlet var myLabel: UILabel!
     

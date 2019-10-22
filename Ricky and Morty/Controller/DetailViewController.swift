@@ -9,14 +9,14 @@
 import UIKit
 
 class DetailViewController: UITableViewController {
-
+    
     @IBOutlet var cell: UITableViewCell!
     @IBOutlet var idLabel: UILabel!
     @IBOutlet var statusLabel: UILabel!
     @IBOutlet var spaciesLabel: UILabel!
     @IBOutlet var gederLabel: UILabel!
     @IBOutlet var avatar: UIImageView!
-
+    
     var сharacter: Сharacter!
     
     override func viewDidLoad() {
@@ -26,7 +26,7 @@ class DetailViewController: UITableViewController {
         customizeTableView(object: сharacter)
     }
     
-// MARK: - Private methods
+    // MARK: - Private methods
     
     private func customizeTableView(object: Сharacter) {
         title = object.name
