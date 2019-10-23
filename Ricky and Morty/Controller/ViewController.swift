@@ -60,8 +60,9 @@ class ViewController: UIViewController {
                     self.tableView.isHidden = false
                     self.tableView.reloadData()
                     self.navigationController?.navigationBar.isHidden = false
-                    self.tableView.topAnchor.constraint(equalTo: (
-                        self.navigationController!.navigationBar.bottomAnchor)).isActive = true
+                    self.tableView.topAnchor.constraint(equalTo:
+                        self.navigationController!.navigationBar.bottomAnchor
+                    ).isActive = true
                 }
             } catch {
                 print(error.localizedDescription)

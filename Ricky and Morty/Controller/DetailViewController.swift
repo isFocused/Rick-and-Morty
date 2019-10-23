@@ -31,9 +31,9 @@ class DetailViewController: UITableViewController {
     private func customizeTableView(object: Сharacter) {
         title = object.name
         idLabel.text = "# \(object.id ?? 0)"
-        statusLabel.text = object.status.rawValue
-        spaciesLabel.text = object.species.rawValue
-        gederLabel.text = object.gender.rawValue
+        statusLabel.text = object.status?.rawValue
+        spaciesLabel.text = object.species?.rawValue
+        gederLabel.text = object.gender?.rawValue
         
         DispatchQueue.global().async {
             guard let stringURL = object.image else { return }

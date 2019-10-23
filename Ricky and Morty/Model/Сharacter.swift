@@ -9,9 +9,9 @@
 struct Сharacter: Decodable {
     let id: Int?
     let name: String?
-    let status: Status
-    let species: Species
-    let gender: Gender
+    let status: Status?
+    let species: Species?
+    let gender: Gender?
     let image: String?
 }
 
