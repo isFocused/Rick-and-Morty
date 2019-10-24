@@ -16,13 +16,16 @@ class DetailViewController: UITableViewController {
     @IBOutlet var spaciesLabel: UILabel!
     @IBOutlet var gederLabel: UILabel!
     @IBOutlet var avatar: UIImageView!
+    @IBOutlet var activityIndicator: UIActivityIndicatorView!
     
     var сharacter: Сharacter!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        avatar.isHidden = true
+        activityIndicator.isHidden = false
+        activityIndicator.startAnimating()
         cell.separatorInset = UIEdgeInsets(top: 0, left: 1000, bottom: 0, right: 0)
-        
         customizeTableView(object: сharacter)
     }
     
@@ -42,6 +45,9 @@ class DetailViewController: UITableViewController {
             
             DispatchQueue.main.async {
                 self.avatar.image = UIImage(data: imageData)
+                self.avatar.isHidden = false
+                self.activityIndicator.stopAnimating()
+                self.activityIndicator.isHidden = true
             }
         }
         tableView.tableFooterView = UIView()
