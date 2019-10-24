@@ -47,7 +47,7 @@ class DetailViewController: UITableViewController {
                 self.avatar.image = UIImage(data: imageData)
                 self.avatar.isHidden = false
                 self.activityIndicator.stopAnimating()
-                self.activityIndicator.isHidden = true
+//                self.activityIndicator.isHidden = true
             }
         }
         tableView.tableFooterView = UIView()
