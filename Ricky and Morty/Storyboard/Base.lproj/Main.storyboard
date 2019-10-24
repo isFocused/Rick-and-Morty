@@ -35,7 +35,7 @@
                                 <rect key="frame" x="0.0" y="347" width="414" height="202"/>
                             </imageView>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="ScJ-I8-OhM">
-                                <rect key="frame" x="197" y="438" width="20" height="20"/>
+                                <rect key="frame" x="197" y="529" width="20" height="20"/>
                             </activityIndicatorView>
                             <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="8M0-aA-jPQ">
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
@@ -88,18 +88,18 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="ScJ-I8-OhM" firstAttribute="bottom" secondItem="s1v-0G-4Wd" secondAttribute="bottom" id="1U1-co-z5a"/>
                             <constraint firstAttribute="trailing" secondItem="s1v-0G-4Wd" secondAttribute="trailing" id="3B8-M9-v5E"/>
                             <constraint firstItem="s1v-0G-4Wd" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="8Q2-cw-rlc"/>
                             <constraint firstItem="8M0-aA-jPQ" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="HLg-BJ-35K"/>
                             <constraint firstItem="s1v-0G-4Wd" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="I7w-CV-4gr"/>
-                            <constraint firstItem="ScJ-I8-OhM" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="RBn-vo-Wg5"/>
                             <constraint firstItem="s1v-0G-4Wd" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="USv-XL-v9b"/>
                             <constraint firstItem="s1v-0G-4Wd" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="VtN-8J-lN1"/>
                             <constraint firstItem="8M0-aA-jPQ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="aH2-CX-Gv3"/>
                             <constraint firstItem="8M0-aA-jPQ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="eNP-Jr-16k"/>
+                            <constraint firstItem="ScJ-I8-OhM" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="gMu-S0-9TT"/>
                             <constraint firstItem="8M0-aA-jPQ" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="gzO-0h-Pjf"/>
                             <constraint firstItem="s1v-0G-4Wd" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="k9d-fX-ag3"/>
-                            <constraint firstItem="ScJ-I8-OhM" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="oE7-XU-eqT"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
