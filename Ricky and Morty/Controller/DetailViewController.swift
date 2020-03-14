@@ -33,21 +33,20 @@ class DetailViewController: UITableViewController {
     
     private func customizeTableView(object: Сharacter) {
         title = object.name
-        idLabel.text = "# \(object.id ?? 0)"
-        statusLabel.text = object.status?.rawValue
-        spaciesLabel.text = object.species?.rawValue
-        gederLabel.text = object.gender?.rawValue
+        idLabel.text = "# \(object.id)"
+        statusLabel.text = object.status.rawValue
+        spaciesLabel.text = object.species.rawValue
+        gederLabel.text = object.gender.rawValue
         
         DispatchQueue.global().async {
-            guard let stringURL = object.image else { return }
-            guard let inageUrl = URL(string: stringURL) else { return }
+            guard let inageUrl = URL(string: object.image) else { return }
             guard let imageData = try? Data(contentsOf: inageUrl) else { return }
             
             DispatchQueue.main.async {
                 self.avatar.image = UIImage(data: imageData)
                 self.avatar.isHidden = false
                 self.activityIndicator.stopAnimating()
-//                self.activityIndicator.isHidden = true
+                self.activityIndicator.isHidden = true
             }
         }
         tableView.tableFooterView = UIView()

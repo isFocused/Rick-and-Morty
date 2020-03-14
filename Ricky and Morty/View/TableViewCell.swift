@@ -15,7 +15,7 @@ class TableViewCell: UITableViewCell {
     
     func customizeCell(object: Сharacter?) {
         guard let character = object else { return }
-        guard let urlImage = URL(string: character.image ?? "") else { return }
+        guard let urlImage = URL(string: character.image) else { return }
         myImage.sd_setImage(with: urlImage, completed: nil)
         myLabel.text = character.name
     }

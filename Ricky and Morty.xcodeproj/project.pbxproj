@@ -19,6 +19,8 @@
 		6CD75F17235B870100659786 /* Сharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD75F16235B870100659786 /* Сharacter.swift */; };
 		923B7D8F241D06B00020C21D /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 923B7D8E241D06B00020C21D /* SDWebImage */; };
 		927A2FFF241D03E700FB04BF /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 927A2FFE241D03E700FB04BF /* Alamofire */; };
+		9288CD1A241D1174008827A6 /* JSONData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9288CD19241D1174008827A6 /* JSONData.swift */; };
+		92F3D14E241D157900A89B16 /* Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F3D14D241D157900A89B16 /* Info.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +36,8 @@
 		6CD75F0E235B85EE00659786 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6CD75F10235B85EE00659786 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6CD75F16235B870100659786 /* Сharacter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Сharacter.swift"; sourceTree = "<group>"; };
+		9288CD19241D1174008827A6 /* JSONData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONData.swift; sourceTree = "<group>"; };
+		92F3D14D241D157900A89B16 /* Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Info.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +91,8 @@
 			isa = PBXGroup;
 			children = (
 				6CD75F16235B870100659786 /* Сharacter.swift */,
+				92F3D14D241D157900A89B16 /* Info.swift */,
+				9288CD19241D1174008827A6 /* JSONData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -221,8 +227,10 @@
 				6C43171B235C97760024E7FA /* TableViewCell.swift in Sources */,
 				6C7A524E235E91BB00E39D02 /* DetailViewController.swift in Sources */,
 				6CD75F07235B85EB00659786 /* ViewController.swift in Sources */,
+				92F3D14E241D157900A89B16 /* Info.swift in Sources */,
 				6C6828092360CE970097CF28 /* NetworkService.swift in Sources */,
 				6CD75F03235B85EB00659786 /* AppDelegate.swift in Sources */,
+				9288CD1A241D1174008827A6 /* JSONData.swift in Sources */,
 				6CD75F05235B85EB00659786 /* SceneDelegate.swift in Sources */,
 				6CD75F17235B870100659786 /* Сharacter.swift in Sources */,
 			);

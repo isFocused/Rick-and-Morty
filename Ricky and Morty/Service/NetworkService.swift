@@ -9,22 +9,27 @@
 import Foundation
 import Alamofire
 
+enum MyError: Error {
+    case overflow
+    case respons
+}
+
 class NetworkService {
     
     private var jsonUrlString: String? = "https://rickandmortyapi.com/api/character/"
     
-    func getData(completion: @escaping ([Сharacter]?) -> ()) {
+    func getData(completion: @escaping (Result<[Сharacter]?, Error>) -> ()) {
         guard let stringUrl = jsonUrlString else { return }
         guard let url = URL(string: stringUrl) else { return }
         AF.request(url).validate().responseJSON { dataResponse in
 
             switch dataResponse.result {
             case .success(let value):
-                let newСharacters = Welcome.getСharacters(from: value)
+                let newСharacters = JSONData.getСharacters(from: value)
                 self.jsonUrlString = newСharacters?.info.next
-                completion(newСharacters?.results)
+                completion(.success(newСharacters?.results))
             case .failure(let error):
-                print(error.localizedDescription)
+                completion(.failure(error))
             }
         }
     }

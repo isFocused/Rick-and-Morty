@@ -36,16 +36,24 @@ class ViewController: UIViewController {
         tableView.isHidden = true
         tableView.tableFooterView = myView
         navigationController?.navigationBar.isHidden = true
-        networkManager.getData { self.сharacters = $0; self.updateInterfeise() }
-        layout()
+        networkManager.getData { [weak self] in
+            guard let self = self else { return }
+            switch $0 {
+            case .success(let сharacters):
+                self.сharacters = сharacters
+                self.updateInterfeise()
+            case .failure(let error):
+                self.errorAlert(message: error.localizedDescription)
+            }
+        }
     }
     
     // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "Next" {
-            let vc = segue.destination as! DetailViewController
-            vc.сharacter = sender as? Сharacter
+            let viewController = segue.destination as! DetailViewController
+            viewController.сharacter = sender as? Сharacter
         }
     }
     
@@ -58,6 +66,16 @@ class ViewController: UIViewController {
             self.tableView.reloadData()
             self.navigationController?.navigationBar.isHidden = false
             self.tableView.setNeedsUpdateConstraints()
+        }
+    }
+    
+    func errorAlert(message: String) {
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: "Error",
+                                          message: message,
+                                          preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .cancel))
+            self.present(alert, animated: true)
         }
     }
     
@@ -77,10 +95,18 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row == сharacters.count - 1 {
-            networkManager.getData { (new) in
-                guard let new = new else { return }
-                self.сharacters += new
-                self.tableView.reloadData()
+            networkManager.getData { [weak self] in
+                guard let self = self else { return }
+                switch $0 {
+                case .success(let newCharacters):
+                    newCharacters?.forEach {
+                        self.сharacters.insert($0, at: self.сharacters.endIndex)
+                        self.tableView.insertRows(at: [IndexPath(row: self.сharacters.count - 1, section: 0)],
+                                                  with: .right)
+                    }
+                case .failure(let error):
+                    self.errorAlert(message: error.localizedDescription)
+                }
             }
         }
     }
