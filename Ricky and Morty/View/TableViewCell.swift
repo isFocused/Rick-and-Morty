@@ -6,7 +6,7 @@
 //  Copyright © 2019 Денис Иванов. All rights reserved.
 //
 
-import UIKit
+import SDWebImage
 
 class TableViewCell: UITableViewCell {
     
@@ -14,15 +14,14 @@ class TableViewCell: UITableViewCell {
     @IBOutlet var myLabel: UILabel!
     
     func customizeCell(object: Сharacter?) {
-        myLabel.text = object?.name
-        DispatchQueue.global().async {
-            guard let stringURL = object?.image else { return }
-            guard let inageUrl = URL(string: stringURL) else { return }
-            guard let imageData = try? Data(contentsOf: inageUrl) else { return }
-            
-            DispatchQueue.main.async {
-                self.myImage.image = UIImage(data: imageData)
-            }
-        }
+        guard let character = object else { return }
+        guard let urlImage = URL(string: character.image ?? "") else { return }
+        myImage.sd_setImage(with: urlImage, completed: nil)
+        myLabel.text = character.name
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        myImage.image = nil
     }
 }

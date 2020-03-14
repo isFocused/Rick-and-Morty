@@ -6,7 +6,38 @@
 //  Copyright © 2019 Денис Иванов. All rights reserved.
 //
 
-struct Сharacter: Decodable {
+struct Welcome: Codable {
+    let info: Info
+    let results: [Сharacter]
+    
+    init(dictionary: [String: Any]) {
+        let infoDistionary = dictionary["info"] as! [String: Any]
+        let resultsDistionary = dictionary["results"] as! [[String: Any]]
+        
+        info = Info(infoDistionary: infoDistionary)
+        results = resultsDistionary.map { Сharacter(characterDictionary: $0) }
+    }
+    
+    static func getСharacters(from value: Any) -> Welcome? {
+        guard let jsonData = value as? [String: Any] else { return nil }
+        return Welcome(dictionary: jsonData)
+    }
+}
+
+struct Info: Codable {
+    let count, pages: Int
+    let next: String?
+    let prev: String
+    
+    init(infoDistionary: [String: Any]) {
+        count = infoDistionary["count"] as! Int
+        pages = infoDistionary["pages"] as! Int
+        next = infoDistionary["next"] as? String
+        prev = infoDistionary["prev"] as! String
+    }
+}
+
+struct Сharacter: Codable {
     let id: Int?
     let name: String?
     let status: Status?
@@ -29,14 +60,14 @@ struct Сharacter: Decodable {
     }
 }
 
-enum Gender: String, Decodable {
+enum Gender: String, Codable {
     case female = "Female"
     case genderless = "Genderless"
     case male = "Male"
     case unknown
 }
 
-enum Species: String, Decodable {
+enum Species: String, Codable {
     case alien = "Alien"
     case animal = "Animal"
     case cronenberg = "Cronenberg"
@@ -52,7 +83,7 @@ enum Species: String, Decodable {
 }
 
 
-enum Status: String, Decodable {
+enum Status: String, Codable {
     case alive = "Alive"
     case dead = "Dead"
     case unknown

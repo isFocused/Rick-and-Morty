@@ -6,43 +6,27 @@
 //  Copyright © 2019 Денис Иванов. All rights reserved.
 //
 
+import Foundation
 import Alamofire
 
 class NetworkService {
     
-    private var jsonUrlString = "https://rickandmortyapi.com/api/character/"
+    private var jsonUrlString: String? = "https://rickandmortyapi.com/api/character/"
     
-    func getData(completion: @escaping ([Сharacter]?) -> ()){
-        generateRandomId(urlString: &jsonUrlString)
-        
-        guard let url = URL(string: jsonUrlString) else { return }
-        request(url).validate().responseJSON { dataResponse in
-            
+    func getData(completion: @escaping ([Сharacter]?) -> ()) {
+        guard let stringUrl = jsonUrlString else { return }
+        guard let url = URL(string: stringUrl) else { return }
+        AF.request(url).validate().responseJSON { dataResponse in
+
             switch dataResponse.result {
             case .success(let value):
-                let newСharacters = Сharacter.getСharacters(from: value)
-                completion(newСharacters)
+                let newСharacters = Welcome.getСharacters(from: value)
+                self.jsonUrlString = newСharacters?.info.next
+                completion(newСharacters?.results)
             case .failure(let error):
-                print(error)
+                print(error.localizedDescription)
             }
         }
-    }
-    
-    /*
-     Добавил генерацию случайных айди, при каждом новом запуске, персонажи будут загружаться случайно, а не одни и теже, как было до этого.
-     */
-    
-    private func generateRandomId(urlString: inout String) {
-        var newStringValues = ""
-        var quantity = 20
-        
-        (1...20).forEach { _ in
-            quantity -= 1
-            let stringValue = Int.random(in: 1...493)
-            quantity != 0 ? newStringValues.append(contentsOf: "\(stringValue),") :
-                            newStringValues.append(contentsOf: "\(stringValue)")
-        }
-        urlString += newStringValues
     }
 }
 
