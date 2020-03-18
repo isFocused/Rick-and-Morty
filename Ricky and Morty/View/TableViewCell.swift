@@ -13,11 +13,15 @@ class TableViewCell: UITableViewCell {
     @IBOutlet var myImage: UIImageView!
     @IBOutlet var myLabel: UILabel!
     
-    func customizeCell(object: Сharacter?) {
+    func сonfigureСell(object: Сharacter?) {
         guard let character = object else { return }
-        guard let urlImage = URL(string: character.image) else { return }
-        myImage.sd_setImage(with: urlImage, completed: nil)
+        guard let imageUrl = URL(string: character.image) else { return }
+        myImage.sd_setImage(with: imageUrl,
+                            placeholderImage: UIImage(named: "noImage"),
+                            options: .highPriority,
+                            context: nil)
         myLabel.text = character.name
+        
     }
     
     override func prepareForReuse() {

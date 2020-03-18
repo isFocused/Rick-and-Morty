@@ -6,7 +6,7 @@
 //  Copyright © 2019 Денис Иванов. All rights reserved.
 //
 
-import UIKit
+import SDWebImage
 
 class DetailViewController: UITableViewController {
     
@@ -15,16 +15,15 @@ class DetailViewController: UITableViewController {
     @IBOutlet var statusLabel: UILabel!
     @IBOutlet var spaciesLabel: UILabel!
     @IBOutlet var gederLabel: UILabel!
+    @IBOutlet var dateLabel: UILabel!
     @IBOutlet var avatar: UIImageView!
-    @IBOutlet var activityIndicator: UIActivityIndicatorView!
     
     var сharacter: Сharacter!
+    var dateFormater: DateFormaterService!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        avatar.isHidden = true
-        activityIndicator.isHidden = false
-        activityIndicator.startAnimating()
+        dateFormater = DateFormaterService()
         cell.separatorInset = UIEdgeInsets(top: 0, left: 1000, bottom: 0, right: 0)
         customizeTableView(object: сharacter)
     }
@@ -37,16 +36,15 @@ class DetailViewController: UITableViewController {
         statusLabel.text = object.status.rawValue
         spaciesLabel.text = object.species.rawValue
         gederLabel.text = object.gender.rawValue
+        dateLabel.text = dateFormater.creatDateString(stringJson: object.created)
         
         DispatchQueue.global().async {
             guard let inageUrl = URL(string: object.image) else { return }
-            guard let imageData = try? Data(contentsOf: inageUrl) else { return }
-            
             DispatchQueue.main.async {
-                self.avatar.image = UIImage(data: imageData)
-                self.avatar.isHidden = false
-                self.activityIndicator.stopAnimating()
-                self.activityIndicator.isHidden = true
+                self.avatar.sd_setImage(with: inageUrl,
+                placeholderImage: UIImage(named: "noImage"),
+                options: .highPriority,
+                context: nil)
             }
         }
         tableView.tableFooterView = UIView()

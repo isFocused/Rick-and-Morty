@@ -37,13 +37,12 @@ class ViewController: UIViewController {
         tableView.tableFooterView = myView
         navigationController?.navigationBar.isHidden = true
         networkManager.getData { [weak self] in
-            guard let self = self else { return }
             switch $0 {
             case .success(let сharacters):
-                self.сharacters = сharacters
-                self.updateInterfeise()
+                self?.сharacters = сharacters
+                self?.updateInterfeise()
             case .failure(let error):
-                self.errorAlert(message: error.localizedDescription)
+                self?.errorAlert(message: error.localizedDescription)
             }
         }
     }
@@ -101,8 +100,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                 case .success(let newCharacters):
                     newCharacters?.forEach {
                         self.сharacters.insert($0, at: self.сharacters.endIndex)
-                        self.tableView.insertRows(at: [IndexPath(row: self.сharacters.count - 1, section: 0)],
-                                                  with: .right)
+                        self.tableView.insertRows(at: [IndexPath(row: self.сharacters.count - 1, section: 0)], with: .automatic)
                     }
                 case .failure(let error):
                     self.errorAlert(message: error.localizedDescription)
@@ -116,7 +114,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! TableViewCell
         let сharacter = сharacters?[indexPath.row]
         
-        cell.customizeCell(object: сharacter)
+        cell.сonfigureСell(object: сharacter)
         return cell
     }
     

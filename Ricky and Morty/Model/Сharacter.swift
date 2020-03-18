@@ -13,6 +13,7 @@ struct Сharacter: Codable {
     let species: Species
     let gender: Gender
     let image: String
+    let created: String
     
     init(characterDictionary: [String: Any]) {
         id = characterDictionary["id"] as! Int
@@ -21,6 +22,7 @@ struct Сharacter: Codable {
         species = Species(rawValue: (characterDictionary["species"] as! Species.RawValue)) ?? Species.unknown
         gender = Gender(rawValue: (characterDictionary["gender"] as! Gender.RawValue)) ?? Gender.unknown
         image = characterDictionary["image"] as! String
+        created = characterDictionary["created"] as! String
     }
     
     static func getСharacters(from value: Any) -> [Сharacter]? {

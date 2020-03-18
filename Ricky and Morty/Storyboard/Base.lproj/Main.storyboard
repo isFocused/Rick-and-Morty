@@ -136,17 +136,12 @@
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="474-GP-s6C">
                                                     <rect key="frame" x="16" y="11" width="288" height="288"/>
                                                 </imageView>
-                                                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="9m8-ja-uy9">
-                                                    <rect key="frame" x="150" y="145" width="20" height="20"/>
-                                                </activityIndicatorView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="474-GP-s6C" firstAttribute="trailing" secondItem="CaT-dM-BYn" secondAttribute="trailingMargin" id="79q-ci-eTi"/>
                                                 <constraint firstItem="474-GP-s6C" firstAttribute="leading" secondItem="CaT-dM-BYn" secondAttribute="leadingMargin" id="BHw-xw-fx1"/>
                                                 <constraint firstItem="474-GP-s6C" firstAttribute="top" secondItem="CaT-dM-BYn" secondAttribute="topMargin" id="BpG-aE-Awu"/>
-                                                <constraint firstItem="9m8-ja-uy9" firstAttribute="centerY" secondItem="CaT-dM-BYn" secondAttribute="centerY" id="XOe-KK-7To"/>
                                                 <constraint firstItem="474-GP-s6C" firstAttribute="bottom" secondItem="CaT-dM-BYn" secondAttribute="bottomMargin" id="dDP-3w-2vK"/>
-                                                <constraint firstItem="9m8-ja-uy9" firstAttribute="centerX" secondItem="CaT-dM-BYn" secondAttribute="centerX" id="dI6-6B-lvR"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -282,6 +277,39 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Czn-oA-Atv">
+                                        <rect key="frame" x="0.0" y="512" width="320" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Czn-oA-Atv" id="9Cb-Jh-yhK">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="D88-aX-Lra">
+                                                    <rect key="frame" x="16" y="11" width="288" height="21.5"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Created" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LSh-O6-Top">
+                                                            <rect key="frame" x="0.0" y="0.0" width="197.5" height="21.5"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nil" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ma8-C9-6fg">
+                                                            <rect key="frame" x="205.5" y="0.0" width="82.5" height="21.5"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="D88-aX-Lra" firstAttribute="leading" secondItem="9Cb-Jh-yhK" secondAttribute="leading" constant="16" id="DJQ-YE-LaR"/>
+                                                <constraint firstItem="D88-aX-Lra" firstAttribute="top" secondItem="9Cb-Jh-yhK" secondAttribute="top" constant="11" id="djs-fQ-aCE"/>
+                                                <constraint firstAttribute="trailing" secondItem="D88-aX-Lra" secondAttribute="trailing" constant="16" id="ffw-Yp-24P"/>
+                                                <constraint firstAttribute="bottom" secondItem="D88-aX-Lra" secondAttribute="bottom" constant="11" id="s3y-Ki-Pid"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -292,9 +320,9 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Title" largeTitleDisplayMode="always" id="Sim-OV-rGO"/>
                     <connections>
-                        <outlet property="activityIndicator" destination="9m8-ja-uy9" id="PDt-6z-BeW"/>
                         <outlet property="avatar" destination="474-GP-s6C" id="ix8-S8-8Pn"/>
                         <outlet property="cell" destination="t90-ze-YvY" id="pEV-SD-1vg"/>
+                        <outlet property="dateLabel" destination="ma8-C9-6fg" id="O1s-qy-ASp"/>
                         <outlet property="gederLabel" destination="xBJ-Am-UDm" id="gs6-Zp-fBe"/>
                         <outlet property="idLabel" destination="CHT-CA-bI9" id="caf-v9-WXl"/>
                         <outlet property="spaciesLabel" destination="Lww-aK-TqW" id="08q-Bh-wcW"/>
