@@ -1,6 +1,6 @@
 //
 //  NetworkService.swift
-//  Ricky and Morty
+//  Rick and Morty
 //
 //  Created by Денис Иванов on 23.10.2019.
 //  Copyright © 2019 Денис Иванов. All rights reserved.

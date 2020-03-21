@@ -1,6 +1,6 @@
 //
 //  Сharacter.swift
-//  Ricky and Morty
+//  Rick and Morty
 //
 //  Created by Денис Иванов on 19.10.2019.
 //  Copyright © 2019 Денис Иванов. All rights reserved.
@@ -18,11 +18,12 @@ struct Сharacter: Codable {
     init(characterDictionary: [String: Any]) {
         id = characterDictionary["id"] as! Int
         name = characterDictionary["name"] as! String
+        image = characterDictionary["image"] as! String
+        created = characterDictionary["created"] as! String
+        
         status = Status(rawValue: (characterDictionary["status"] as! Status.RawValue)) ?? Status.unknown
         species = Species(rawValue: (characterDictionary["species"] as! Species.RawValue)) ?? Species.unknown
         gender = Gender(rawValue: (characterDictionary["gender"] as! Gender.RawValue)) ?? Gender.unknown
-        image = characterDictionary["image"] as! String
-        created = characterDictionary["created"] as! String
     }
     
     static func getСharacters(from value: Any) -> [Сharacter]? {

@@ -1,6 +1,6 @@
 //
 //  TableViewCell.swift
-//  Ricky and Morty
+//  Rick and Morty
 //
 //  Created by Денис Иванов on 20.10.2019.
 //  Copyright © 2019 Денис Иванов. All rights reserved.
@@ -21,7 +21,6 @@ class TableViewCell: UITableViewCell {
                             options: .highPriority,
                             context: nil)
         myLabel.text = character.name
-        
     }
     
     override func prepareForReuse() {
