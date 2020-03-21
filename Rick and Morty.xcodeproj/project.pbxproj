@@ -28,7 +28,7 @@
 		6C43171A235C97760024E7FA /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		6C6828082360CE970097CF28 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		6C7A524D235E91BB00E39D02 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
-		6CD75EFF235B85EB00659786 /* Ricky and Morty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Ricky and Morty.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6CD75EFF235B85EB00659786 /* Rick and Morty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Rick and Morty.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CD75F02235B85EB00659786 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6CD75F04235B85EB00659786 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		6CD75F06235B85EB00659786 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -120,7 +120,7 @@
 		6CD75EF6235B85EB00659786 = {
 			isa = PBXGroup;
 			children = (
-				6CD75F01235B85EB00659786 /* Ricky and Morty */,
+				6CD75F01235B85EB00659786 /* Rick and Morty */,
 				6CD75F00235B85EB00659786 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -128,12 +128,12 @@
 		6CD75F00235B85EB00659786 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6CD75EFF235B85EB00659786 /* Ricky and Morty.app */,
+				6CD75EFF235B85EB00659786 /* Rick and Morty.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		6CD75F01235B85EB00659786 /* Ricky and Morty */ = {
+		6CD75F01235B85EB00659786 /* Rick and Morty */ = {
 			isa = PBXGroup;
 			children = (
 				6C7A524F235EA6B500E39D02 /* App */,
@@ -145,7 +145,7 @@
 				6C7A5253235EA6EE00E39D02 /* Support */,
 				6CD75F10235B85EE00659786 /* Info.plist */,
 			);
-			path = "Ricky and Morty";
+			path = "Rick and Morty";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -169,7 +169,7 @@
 				923B7D8E241D06B00020C21D /* SDWebImage */,
 			);
 			productName = "Ricky and Morty";
-			productReference = 6CD75EFF235B85EB00659786 /* Ricky and Morty.app */;
+			productReference = 6CD75EFF235B85EB00659786 /* Rick and Morty.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -187,7 +187,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 6CD75EFA235B85EB00659786 /* Build configuration list for PBXProject "Ricky and Morty" */;
+			buildConfigurationList = 6CD75EFA235B85EB00659786 /* Build configuration list for PBXProject "Rick and Morty" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -382,13 +382,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7B369WKZS6;
-				INFOPLIST_FILE = "Ricky and Morty/Info.plist";
+				INFOPLIST_FILE = "Rick and Morty/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.123.Ricky-and-Morty";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.123.Rick-and-Morty";
+				PRODUCT_NAME = "Rick and Morty";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -400,13 +400,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7B369WKZS6;
-				INFOPLIST_FILE = "Ricky and Morty/Info.plist";
+				INFOPLIST_FILE = "Rick and Morty/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.123.Ricky-and-Morty";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.123.Rick-and-Morty";
+				PRODUCT_NAME = "Rick and Morty";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -415,7 +415,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		6CD75EFA235B85EB00659786 /* Build configuration list for PBXProject "Ricky and Morty" */ = {
+		6CD75EFA235B85EB00659786 /* Build configuration list for PBXProject "Rick and Morty" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6CD75F11235B85EE00659786 /* Debug */,
