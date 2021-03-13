@@ -38,7 +38,8 @@ class NetworkService {
     
     private func createSession<T: Decodable>(type: T.Type, request: URLRequest, completion: @escaping ((Result<T, Error>) -> ())) -> URLSessionDataTask {
         URLSession.shared.dataTask(with: request) {
-            if let error = $2 { completion(.failure(error)) }
+            if let error = $2 {
+                completion(.failure(error)) }
             guard let data = $0 else {
                 completion(.failure(NetworkError.dataNotExist))
                 return
@@ -52,10 +53,10 @@ class NetworkService {
         jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
         
         do {
-            let newData = try jsonDecoder.decode(type, from: dataJson)
+            let newData = try! jsonDecoder.decode(type, from: dataJson)
             return .success(newData)
         } catch {
-            return .failure(NetworkError.decodeError)
+            return .failure(error)
         }
     }
 }

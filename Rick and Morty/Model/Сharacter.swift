@@ -9,9 +9,9 @@
 struct Сharacter: Codable {
     let id: Int
     let name: String
-    let status: Status
-    let species: Species
-    let gender: Gender
+    let status: String
+    let species: String
+    let gender: String
     let image: String
     let created: String
 }
@@ -35,6 +35,7 @@ enum Species: String, Codable {
     case poopybutthole = "Poopybutthole"
     case robot = "Robot"
     case vampire = "Vampire"
+    case mythologicalCreature = "Mythological Creature"
     case unknown
 }
 

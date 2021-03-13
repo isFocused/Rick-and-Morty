@@ -20,6 +20,7 @@ class CharactersViewController: UIViewController {
     private var сharacters: [Сharacter]!
     private let networkManager = NetworkService()
     private let segueIdentifaer: SegueIdentifaer = .detail
+    private var carentPage = 1
     
     // MARK: - Lifecycle
     
@@ -78,21 +79,25 @@ class CharactersViewController: UIViewController {
     }
     
     private func loadData() {
-        networkManager.loadData(target: .character(1), type: JSONData.self) { [weak self] in
-            switch $0 {
-            case let .success(json):
-                self?.сharacters = json.results
-                self?.updateInterfeise()
-            case let .failure(error):
-                self?.errorAlert(message: error.localizedDescription)
-            }
+        networkManager
+            .loadData(target: .character(carentPage), type: JSONData.self) { [weak self] in
+                switch $0 {
+                case let .success(json):
+                    self?.carentPage += 1
+                    self?.сharacters = json.results
+                    self?.updateInterfeise()
+                case let .failure(error):
+                    self?.errorAlert(message: error.localizedDescription)
+                }
         }
     }
     
     private func loadNextPage() {
-        networkManager.loadData(target: .character(2), type: JSONData.self) { [weak self] in
+        networkManager.loadData(target: .character(carentPage), type: JSONData.self) { [weak self] in
             switch $0 {
             case let .success(json):
+                guard json.info.pages != self?.carentPage else { return }
+                self?.carentPage += 1
                 self?.сharacters.append(contentsOf: json.results)
                 DispatchQueue.main.async {
                     self?.tableView.reloadData()

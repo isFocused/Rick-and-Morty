@@ -36,9 +36,9 @@ class CharacterDetailViewController: UITableViewController {
     private func customizeTableView(object: Сharacter) {
         title = object.name
         idLabel.text = "# \(object.id)"
-        statusLabel.text = object.status.rawValue
-        spaciesLabel.text = object.species.rawValue
-        gederLabel.text = object.gender.rawValue
+        statusLabel.text = object.status
+        spaciesLabel.text = object.species
+        gederLabel.text = object.gender
         dateLabel.text = dateFormater.creatDateString(stringJson: object.created)
         
         DispatchQueue.global().async {
