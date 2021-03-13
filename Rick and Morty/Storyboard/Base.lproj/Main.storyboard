@@ -109,7 +109,7 @@
                     <connections>
                         <outlet property="activityIndicator" destination="ScJ-I8-OhM" id="hzA-dX-ldb"/>
                         <outlet property="tableView" destination="8M0-aA-jPQ" id="ljD-Qy-PIV"/>
-                        <segue destination="SeG-Qu-dwm" kind="show" identifier="Next" id="LMU-B9-KNW"/>
+                        <segue destination="SeG-Qu-dwm" kind="show" identifier="Detail" id="LMU-B9-KNW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

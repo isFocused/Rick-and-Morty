@@ -23,8 +23,10 @@ class NetworkService {
     private func configureUrl(in target: ApiTarget) throws -> URL {
         var urlComponets = URLComponents()
         urlComponets.scheme = target.scheme
+        urlComponets.host = target.host
         urlComponets.path = target.path
         urlComponets.queryItems = target.parametrs.map { URLQueryItem(name: $0.key, value: $0.value) }
+        print(try urlComponets.craeteUrl())
         return try urlComponets.craeteUrl()
     }
     

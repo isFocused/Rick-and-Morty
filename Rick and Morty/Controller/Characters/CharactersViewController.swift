@@ -32,7 +32,7 @@ class CharactersViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == segueIdentifaer.rawValue {
-            let viewController = segue.destination as! DetailViewController
+            let viewController = segue.destination as! CharacterDetailViewController
             viewController.сharacter = sender as? Сharacter
         }
     }
@@ -78,7 +78,7 @@ class CharactersViewController: UIViewController {
     }
     
     private func loadData() {
-        networkManager.loadData(target: .character(), type: JSONData.self) { [weak self] in
+        networkManager.loadData(target: .character(1), type: JSONData.self) { [weak self] in
             switch $0 {
             case let .success(json):
                 self?.сharacters = json.results
@@ -89,8 +89,18 @@ class CharactersViewController: UIViewController {
         }
     }
     
-    private func loadNextPage(indexPath: IndexPath) {
-        
+    private func loadNextPage() {
+        networkManager.loadData(target: .character(2), type: JSONData.self) { [weak self] in
+            switch $0 {
+            case let .success(json):
+                self?.сharacters.append(contentsOf: json.results)
+                DispatchQueue.main.async {
+                    self?.tableView.reloadData()
+                }
+            case let .failure(error):
+                self?.errorAlert(message: error.localizedDescription)
+            }
+        }
     }
 }
 
@@ -118,8 +128,10 @@ extension CharactersViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension CharactersViewController: UITableViewDataSourcePrefetching {
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-        //        indexPaths.forEach {
-        //            loadNextPage(indexPath: $0)
-        //        }
+        indexPaths.forEach {
+            if $0.row == self.сharacters.count - 1 {
+                self.loadNextPage()
+            }
+        }
     }
 }
