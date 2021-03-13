@@ -14,22 +14,6 @@ struct Сharacter: Codable {
     let gender: Gender
     let image: String
     let created: String
-    
-    init(characterDictionary: [String: Any]) {
-        id = characterDictionary["id"] as! Int
-        name = characterDictionary["name"] as! String
-        image = characterDictionary["image"] as! String
-        created = characterDictionary["created"] as! String
-        
-        status = Status(rawValue: (characterDictionary["status"] as! Status.RawValue)) ?? Status.unknown
-        species = Species(rawValue: (characterDictionary["species"] as! Species.RawValue)) ?? Species.unknown
-        gender = Gender(rawValue: (characterDictionary["gender"] as! Gender.RawValue)) ?? Gender.unknown
-    }
-    
-    static func getСharacters(from value: Any) -> [Сharacter]? {
-        guard let jsonData = value as? Array<[String: Any]> else { return nil }
-        return jsonData.compactMap { Сharacter(characterDictionary: $0) }
-    }
 }
 
 enum Gender: String, Codable {

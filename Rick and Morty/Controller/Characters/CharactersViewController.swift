@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  CharactersViewController.swift
 //  Rick and Morty
 //
 //  Created by Денис Иванов on 19.10.2019.
@@ -8,37 +8,50 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class CharactersViewController: UIViewController {
     
-    var сharacters: [Сharacter]!
-    let networkManager = NetworkService()
-
+    // MARK: - IBOutlets
+    
     @IBOutlet var tableView: UITableView!
-    @IBOutlet var activitiIndicator: UIActivityIndicatorView!
+    @IBOutlet var activityIndicator: UIActivityIndicatorView!
     
+    // MARK: - Private properties
+    
+    private var сharacters: [Сharacter]!
+    private let networkManager = NetworkService()
+    private let segueIdentifaer: SegueIdentifaer = .detail
+    
+    // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        activitiIndicator.startAnimating()
-        tableView.isHidden = true
-        navigationController?.navigationBar.isHidden = true
-        networkManager.getData { [weak self] in
-            switch $0 {
-            case .success(let сharacters):
-                self?.сharacters = сharacters
-                self?.updateInterfeise()
-            case .failure(let error):
-                self?.errorAlert(message: error.localizedDescription)
-            }
-        }
+        confugureScreen()
     }
     
     // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "Next" {
+        if segue.identifier == segueIdentifaer.rawValue {
             let viewController = segue.destination as! DetailViewController
             viewController.сharacter = sender as? Сharacter
+        }
+    }
+    
+    // MARK: - Configuration
+    
+    private func confugureScreen() {
+        confugureiOSVersion()
+        activityIndicator.startAnimating()
+        tableView.isHidden = true
+        navigationController?.navigationBar.isHidden = true
+        loadData()
+    }
+    
+    private func confugureiOSVersion() {
+        if #available(iOS 13.0, *) {
+            activityIndicator.style = .large
+        } else {
+            activityIndicator.style = .whiteLarge
         }
     }
     
@@ -46,7 +59,7 @@ class ViewController: UIViewController {
     
     private func updateInterfeise() {
         DispatchQueue.main.async {
-            self.activitiIndicator.stopAnimating()
+            self.activityIndicator.stopAnimating()
             self.tableView.isHidden = false
             self.tableView.reloadData()
             self.navigationController?.navigationBar.isHidden = false
@@ -64,34 +77,32 @@ class ViewController: UIViewController {
         }
     }
     
-    private func loadNextPage(indexPath: IndexPath) {
-        if indexPath.row == сharacters.count - 1 {
-            networkManager.getData { [weak self] in
-                guard let self = self else { return }
-                switch $0 {
-                case .success(let newCharacters):
-                    newCharacters?.forEach {
-                        self.сharacters.insert($0, at: self.сharacters.endIndex)
-                        self.tableView.insertRows(at: [IndexPath(row: self.сharacters.count - 1,
-                                                                 section: 0)], with: .automatic)
-                    }
-                case .failure(let error):
-                    self.errorAlert(message: error.localizedDescription)
-                }
+    private func loadData() {
+        networkManager.loadData(target: .character(), type: JSONData.self) { [weak self] in
+            switch $0 {
+            case let .success(json):
+                self?.сharacters = json.results
+                self?.updateInterfeise()
+            case let .failure(error):
+                self?.errorAlert(message: error.localizedDescription)
             }
         }
+    }
+    
+    private func loadNextPage(indexPath: IndexPath) {
+        
     }
 }
 
 // MARK: - UITableViewDelegate, UITableViewDataSource
 
-extension ViewController: UITableViewDelegate, UITableViewDataSource {
+extension CharactersViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         сharacters?.count ?? 0
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! TableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCell.reuseIdentifaer, for: indexPath) as! TableViewCell
         let сharacter = сharacters?[indexPath.row]
         
         cell.сonfigureСell(object: сharacter)
@@ -101,14 +112,14 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let сharacter = сharacters?[indexPath.row]
-        performSegue(withIdentifier: "Next", sender: сharacter)
+        performSegue(withIdentifier: segueIdentifaer.rawValue, sender: сharacter)
     }
 }
 
-extension ViewController: UITableViewDataSourcePrefetching {
+extension CharactersViewController: UITableViewDataSourcePrefetching {
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-        indexPaths.forEach {
-            loadNextPage(indexPath: $0)
-        }
+        //        indexPaths.forEach {
+        //            loadNextPage(indexPath: $0)
+        //        }
     }
 }

@@ -1,5 +1,5 @@
 //
-//  DetailViewController.swift
+//  CharacterDetailViewController.swift
 //  Rick and Morty
 //
 //  Created by Денис Иванов on 22.10.2019.
@@ -8,7 +8,7 @@
 
 import SDWebImage
 
-class DetailViewController: UITableViewController {
+class CharacterDetailViewController: UITableViewController {
     
     @IBOutlet var cell: UITableViewCell!
     @IBOutlet var idLabel: UILabel!
@@ -24,8 +24,11 @@ class DetailViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         dateFormater = DateFormaterService()
-        cell.separatorInset = UIEdgeInsets(top: 0, left: 1000, bottom: 0, right: 0)
         customizeTableView(object: сharacter)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        cell.separatorInset = UIEdgeInsets(top: 0, left: UIScreen.main.bounds.width / 2, bottom: 0, right: UIScreen.main.bounds.width / 2)
     }
     
     // MARK: - Private methods

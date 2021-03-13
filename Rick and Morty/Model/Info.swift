@@ -12,11 +12,4 @@ struct Info: Codable {
     let count, pages: Int
     let next: String?
 //    let prev: String
-    
-    init(infoDistionary: [String: Any]) {
-        count = infoDistionary["count"] as! Int
-        pages = infoDistionary["pages"] as! Int
-        next = infoDistionary["next"] as? String
-//        prev = infoDistionary["prev"] as! String
-    }
 }

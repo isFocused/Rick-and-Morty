@@ -10,6 +10,8 @@ import SDWebImage
 
 class TableViewCell: UITableViewCell {
     
+    static let reuseIdentifaer = "Cell"
+    
     @IBOutlet var myImage: UIImageView!
     @IBOutlet var myLabel: UILabel!
     
