@@ -21,6 +21,7 @@ class CharactersViewController: UIViewController {
     private let networkManager = NetworkService()
     private let segueIdentifaer: SegueIdentifaer = .detail
     private var carentPage = 1
+    private var numberOfPages = 0
     
     // MARK: - Lifecycle
     
@@ -52,7 +53,7 @@ class CharactersViewController: UIViewController {
         if #available(iOS 13.0, *) {
             activityIndicator.style = .large
         } else {
-            activityIndicator.style = .whiteLarge
+            activityIndicator.style = .gray
         }
     }
     
@@ -84,6 +85,7 @@ class CharactersViewController: UIViewController {
                 switch $0 {
                 case let .success(json):
                     self?.carentPage += 1
+                    self?.numberOfPages = json.info.pages
                     self?.сharacters = json.results
                     self?.updateInterfeise()
                 case let .failure(error):
@@ -93,18 +95,19 @@ class CharactersViewController: UIViewController {
     }
     
     private func loadNextPage() {
-        networkManager.loadData(target: .character(carentPage), type: JSONData.self) { [weak self] in
-            switch $0 {
-            case let .success(json):
-                guard json.info.pages != self?.carentPage else { return }
-                self?.carentPage += 1
-                self?.сharacters.append(contentsOf: json.results)
-                DispatchQueue.main.async {
-                    self?.tableView.reloadData()
+        guard numberOfPages != carentPage else { return }
+        networkManager
+            .loadData(target: .character(carentPage), type: JSONData.self) { [weak self] in
+                switch $0 {
+                case let .success(json):
+                    self?.carentPage += 1
+                    self?.сharacters.append(contentsOf: json.results)
+                    DispatchQueue.main.async {
+                        self?.tableView.reloadData()
+                    }
+                case let .failure(error):
+                    self?.errorAlert(message: error.localizedDescription)
                 }
-            case let .failure(error):
-                self?.errorAlert(message: error.localizedDescription)
-            }
         }
     }
 }
