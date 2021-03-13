@@ -88,10 +88,6 @@ class CharactersViewController: UIViewController {
             }
         }
     }
-    
-    private func loadNextPage(indexPath: IndexPath) {
-        
-    }
 }
 
 // MARK: - UITableViewDelegate, UITableViewDataSource
@@ -118,8 +114,5 @@ extension CharactersViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension CharactersViewController: UITableViewDataSourcePrefetching {
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-        //        indexPaths.forEach {
-        //            loadNextPage(indexPath: $0)
-        //        }
     }
 }
