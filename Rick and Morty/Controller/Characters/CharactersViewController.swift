@@ -20,6 +20,8 @@ class CharactersViewController: UIViewController {
     private var сharacters: [Сharacter]!
     private let networkManager = NetworkService()
     private let segueIdentifaer: SegueIdentifaer = .detail
+    private var carentPage = 1
+    private var numberOfPages = 0
     
     // MARK: - Lifecycle
     
@@ -32,7 +34,7 @@ class CharactersViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == segueIdentifaer.rawValue {
-            let viewController = segue.destination as! DetailViewController
+            let viewController = segue.destination as! CharacterDetailViewController
             viewController.сharacter = sender as? Сharacter
         }
     }
@@ -51,7 +53,7 @@ class CharactersViewController: UIViewController {
         if #available(iOS 13.0, *) {
             activityIndicator.style = .large
         } else {
-            activityIndicator.style = .whiteLarge
+            activityIndicator.style = .gray
         }
     }
     
@@ -67,6 +69,13 @@ class CharactersViewController: UIViewController {
         }
     }
     
+    private func updateTable(newCharacters: [Сharacter]) {
+        сharacters.append(contentsOf: newCharacters)
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
+    
     private func errorAlert(message: String) {
         DispatchQueue.main.async {
             let alert = UIAlertController(title: "Error",
@@ -78,14 +87,31 @@ class CharactersViewController: UIViewController {
     }
     
     private func loadData() {
-        networkManager.loadData(target: .character(), type: JSONData.self) { [weak self] in
-            switch $0 {
-            case let .success(json):
-                self?.сharacters = json.results
-                self?.updateInterfeise()
-            case let .failure(error):
-                self?.errorAlert(message: error.localizedDescription)
-            }
+        networkManager
+            .loadData(target: .character(carentPage), type: JSONData.self) { [weak self] in
+                switch $0 {
+                case let .success(json):
+                    self?.carentPage += 1
+                    self?.numberOfPages = json.info.pages
+                    self?.сharacters = json.results
+                    self?.updateInterfeise()
+                case let .failure(error):
+                    self?.errorAlert(message: error.localizedDescription)
+                }
+        }
+    }
+    
+    private func loadNextPage() {
+        guard numberOfPages != carentPage else { return }
+        networkManager
+            .loadData(target: .character(carentPage), type: JSONData.self) { [weak self] in
+                switch $0 {
+                case let .success(json):
+                    self?.carentPage += 1
+                    self?.updateTable(newCharacters: json.results)
+                case let .failure(error):
+                    self?.errorAlert(message: error.localizedDescription)
+                }
         }
     }
 }
@@ -98,9 +124,8 @@ extension CharactersViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCell.reuseIdentifaer, for: indexPath) as! TableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: CharacterViewCell.reuseIdentifaer, for: indexPath) as! CharacterViewCell
         let сharacter = сharacters?[indexPath.row]
-        
         cell.сonfigureСell(object: сharacter)
         return cell
     }
@@ -114,5 +139,6 @@ extension CharactersViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension CharactersViewController: UITableViewDataSourcePrefetching {
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        indexPaths.forEach { if $0.row == self.сharacters.count - 1 { self.loadNextPage() } }
     }
 }

@@ -16,6 +16,8 @@ class CharacterDetailViewController: UITableViewController {
     @IBOutlet var spaciesLabel: UILabel!
     @IBOutlet var gederLabel: UILabel!
     @IBOutlet var dateLabel: UILabel!
+    @IBOutlet var locationLabel: UILabel!
+    @IBOutlet var numberOfEpisodesLabel: UILabel!
     @IBOutlet var avatar: UIImageView!
     
     var сharacter: Сharacter!
@@ -40,6 +42,8 @@ class CharacterDetailViewController: UITableViewController {
         spaciesLabel.text = object.species.rawValue
         gederLabel.text = object.gender.rawValue
         dateLabel.text = dateFormater.creatDateString(stringJson: object.created)
+        locationLabel.text = object.location.name
+        numberOfEpisodesLabel.text = "\(object.episode.count)"
         
         DispatchQueue.global().async {
             guard let inageUrl = URL(string: object.image) else { return }

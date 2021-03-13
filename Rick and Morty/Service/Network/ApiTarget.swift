@@ -7,7 +7,7 @@
 //
 
 enum ApiTarget {
-    case character(Int = 1)
+    case character(Int)
     
     var httpMethod: String {
         switch self {
@@ -18,17 +18,19 @@ enum ApiTarget {
     
     var scheme: String { "https" }
     
+    var host: String { "rickandmortyapi.com" }
+    
     var path: String {
         switch self {
         case .character:
-            return "rickandmortyapi.com/api/character"
+            return "/api/character/"
         }
     }
     
     var parametrs: [String: String] {
         switch self {
         case let .character(value):
-            return ["pages": "\(value)"]
+            return ["page": "\(value)"]
         }
     }
 }

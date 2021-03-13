@@ -14,33 +14,6 @@ struct Сharacter: Codable {
     let gender: Gender
     let image: String
     let created: String
-}
-
-enum Gender: String, Codable {
-    case female = "Female"
-    case genderless = "Genderless"
-    case male = "Male"
-    case unknown
-}
-
-enum Species: String, Codable {
-    case alien = "Alien"
-    case animal = "Animal"
-    case cronenberg = "Cronenberg"
-    case disease = "Disease"
-    case human = "Human"
-    case humanoid = "Humanoid"
-    case mytholog = "Mytholog"
-    case parasite = "Parasite"
-    case poopybutthole = "Poopybutthole"
-    case robot = "Robot"
-    case vampire = "Vampire"
-    case unknown
-}
-
-
-enum Status: String, Codable {
-    case alive = "Alive"
-    case dead = "Dead"
-    case unknown
+    let location: Location
+    let episode: [String]
 }
