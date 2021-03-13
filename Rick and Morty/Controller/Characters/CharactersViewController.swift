@@ -117,9 +117,8 @@ extension CharactersViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCell.reuseIdentifaer, for: indexPath) as! TableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: CharacterViewCell.reuseIdentifaer, for: indexPath) as! CharacterViewCell
         let сharacter = сharacters?[indexPath.row]
-        
         cell.сonfigureСell(object: сharacter)
         return cell
     }

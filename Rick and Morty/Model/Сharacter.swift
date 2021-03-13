@@ -9,9 +9,9 @@
 struct Сharacter: Codable {
     let id: Int
     let name: String
-    let status: String
-    let species: String
-    let gender: String
+    let status: Status
+    let species: Species
+    let gender: Gender
     let image: String
     let created: String
 }

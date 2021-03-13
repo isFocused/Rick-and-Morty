@@ -26,8 +26,9 @@ class NetworkService {
         urlComponets.host = target.host
         urlComponets.path = target.path
         urlComponets.queryItems = target.parametrs.map { URLQueryItem(name: $0.key, value: $0.value) }
-        print(try urlComponets.craeteUrl())
-        return try urlComponets.craeteUrl()
+        
+        guard let url = urlComponets.craeteUrl() else { throw NetworkError.invalidUrl }
+        return url
     }
     
     private func confugureRequest(in target: ApiTarget) throws -> URLRequest {
@@ -38,8 +39,7 @@ class NetworkService {
     
     private func createSession<T: Decodable>(type: T.Type, request: URLRequest, completion: @escaping ((Result<T, Error>) -> ())) -> URLSessionDataTask {
         URLSession.shared.dataTask(with: request) {
-            if let error = $2 {
-                completion(.failure(error)) }
+            if $2 != nil { completion(.failure(NetworkError.internetNotConnected)) }
             guard let data = $0 else {
                 completion(.failure(NetworkError.dataNotExist))
                 return
@@ -53,17 +53,17 @@ class NetworkService {
         jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
         
         do {
-            let newData = try! jsonDecoder.decode(type, from: dataJson)
+            let newData = try jsonDecoder.decode(type, from: dataJson)
             return .success(newData)
         } catch {
-            return .failure(error)
+            return .failure(NetworkError.decodeError)
         }
     }
 }
 
 extension URLComponents {
-    func craeteUrl() throws -> URL {
-        guard let url = url else { throw NetworkError.invalidUrl }
+    func craeteUrl() -> URL? {
+        guard let url = url else { return nil }
         return url
     }
 }
