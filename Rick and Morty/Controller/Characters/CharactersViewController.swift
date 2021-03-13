@@ -69,6 +69,13 @@ class CharactersViewController: UIViewController {
         }
     }
     
+    private func updateTable(newCharacters: [Сharacter]) {
+        сharacters.append(contentsOf: newCharacters)
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
+    
     private func errorAlert(message: String) {
         DispatchQueue.main.async {
             let alert = UIAlertController(title: "Error",
@@ -101,10 +108,7 @@ class CharactersViewController: UIViewController {
                 switch $0 {
                 case let .success(json):
                     self?.carentPage += 1
-                    self?.сharacters.append(contentsOf: json.results)
-                    DispatchQueue.main.async {
-                        self?.tableView.reloadData()
-                    }
+                    self?.updateTable(newCharacters: json.results)
                 case let .failure(error):
                     self?.errorAlert(message: error.localizedDescription)
                 }
